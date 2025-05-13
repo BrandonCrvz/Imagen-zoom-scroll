@@ -2,33 +2,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Imagen Zoom Scroll</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoom Scroll Imagen</title>
   <style>
     body {
       margin: 0;
-      height: 200vh;
-      background: #111;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: #111;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      height: 200vh; /* espacio para scroll */
     }
-    .zoom-img {
+
+    img.zoom-img {
       width: 80%;
-      max-width: 500px;
-      transition: transform 0.2s ease-out;
+      max-width: 600px;
+      transition: transform 0.3s ease;
+      will-change: transform;
     }
   </style>
 </head>
 <body>
-  <img src="princesa.jpg" class="zoom-img" 
-    id="zoomImg">
+  <img src="princesa.jpg" class="zoom-img" id="zoomImg" alt="princesa" />
 
   <script>
-    const img = document.getElementById("zoomImg");
     window.addEventListener("scroll", () => {
+      const img = document.getElementById("zoomImg");
       const scrollY = window.scrollY;
-      const scale = 1 + scrollY * 0.001;
+      const scale = 1 + scrollY / 1000;
       img.style.transform = `scale(${scale})`;
     });
   </script>
