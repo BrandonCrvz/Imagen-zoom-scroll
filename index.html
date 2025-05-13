@@ -4,22 +4,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zoom Scroll Imágenes</title>
+  <title>Galería para Nuestro Aniversario</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      background-color: #111;
-      color: white;
-      font-family: sans-serif;
+      background-color: #ffc0cb; /* rosado claro */
+      color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #800040;
+      margin-top: 40px;
     }
 
     .imagen-container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      padding: 100px 20px 60px;
     }
 
     img.zoom-img {
@@ -27,34 +35,66 @@
       max-width: 600px;
       transition: transform 0.3s ease;
       will-change: transform;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .titulo-imagen {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #000;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .titulo-imagen.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
+  <h1>Para Ti, Mi Amor</h1>
+
   <div class="imagen-container">
     <img src="princesa.jpg" class="zoom-img" alt="Imagen princesa" />
+    <p class="titulo-imagen">Princesa</p>
   </div>
 
   <div class="imagen-container">
     <img src="nena.jpg" class="zoom-img" alt="Imagen nena" />
+    <p class="titulo-imagen">Nena</p>
   </div>
 
   <div class="imagen-container">
     <img src="bebe.jpg" class="zoom-img" alt="Imagen bebe" />
+    <p class="titulo-imagen">Bebé</p>
   </div>
 
   <div class="imagen-container">
     <img src="nota.jpg" class="zoom-img" alt="Imagen nota" />
+    <p class="titulo-imagen">Nota</p>
   </div>
 
   <script>
+    // Efecto de zoom
     window.addEventListener("scroll", () => {
       const images = document.querySelectorAll(".zoom-img");
       const scrollY = window.scrollY;
-      const scale = 1 + scrollY / 1000;
+      const scale = 1 + scrollY / 3000;
 
       images.forEach((img) => {
-        img.style.transform = `scale(${scale})`;
+        img.style.transform = `scale(${Math.min(scale, 1.2)})`;
+      });
+
+      // Animación de aparición de títulos
+      const titles = document.querySelectorAll(".titulo-imagen");
+      titles.forEach((title) => {
+        const rect = title.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          title.classList.add("visible");
+        }
       });
     });
   </script>
