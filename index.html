@@ -4,17 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zoom Scroll Imagen</title>
+  <title>Zoom Scroll Imágenes</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
       background-color: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .imagen-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 200vh; /* espacio para scroll */
+      height: 100vh;
     }
 
     img.zoom-img {
@@ -26,14 +31,31 @@
   </style>
 </head>
 <body>
-  <img src="princesa.jpg" class="zoom-img" id="zoomImg" alt="princesa" />
+  <div class="imagen-container">
+    <img src="princesa.jpg" class="zoom-img" alt="Imagen princesa" />
+  </div>
+
+  <div class="imagen-container">
+    <img src="nena.jpg" class="zoom-img" alt="Imagen nena" />
+  </div>
+
+  <div class="imagen-container">
+    <img src="bebé.jpg" class="zoom-img" alt="Imagen bebé" />
+  </div>
+
+  <div class="imagen-container">
+    <img src="nota.jpg" class="zoom-img" alt="Imagen nota" />
+  </div>
 
   <script>
     window.addEventListener("scroll", () => {
-      const img = document.getElementById("zoomImg");
+      const images = document.querySelectorAll(".zoom-img");
       const scrollY = window.scrollY;
       const scale = 1 + scrollY / 1000;
-      img.style.transform = `scale(${scale})`;
+
+      images.forEach((img) => {
+        img.style.transform = `scale(${scale})`;
+      });
     });
   </script>
 </body>
