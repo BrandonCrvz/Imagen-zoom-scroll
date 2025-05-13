@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Imagen Zoom Scroll</title>
+  <style>
+    body {
+      margin: 0;
+      height: 200vh;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .zoom-img {
+      width: 80%;
+      max-width: 500px;
+      transition: transform 0.2s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://via.placeholder.com/500" class="zoom-img" id="zoomImg">
+
+  <script>
+    const img = document.getElementById("zoomImg");
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const scale = 1 + scrollY * 0.001;
+      img.style.transform = `scale(${scale})`;
+    });
+  </script>
+</body>
+</html>
